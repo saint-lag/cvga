@@ -80,7 +80,7 @@ def update_viviani(frame, r):
     # Plot vectors
     vector_scale = 0.5
     BLUE = 'blue'
-    PINK = 'PINK'
+    PINK = 'magenta'
     PURPLE = 'purple'
 
     tangent_vector, = plt.plot(
@@ -128,7 +128,7 @@ if __name__ == '__main__':
         # CONSTANTS
         a, b, c, d = 2, 2, 2, 2
         A, B = 2, 2
-        r = 4
+        r = 8
 
         D = (A+B)*2
 
