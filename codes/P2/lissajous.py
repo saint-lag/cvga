@@ -45,7 +45,9 @@ def update_lissajous(frame, A, B, a, b, ap, bp, cp, dp, phi):
         if len(plots) > ZERO:
             plots.pop().remove()
     lissajous, = plt.plot(
-        x_lissajous(A, a, phi)[:frame+1], y_lissajous(B, b)[:frame+1], z_lissajous(A, B, a, b, ap, bp, cp, dp, phi)[:frame+1], color='firebrick'
+        x_lissajous(A, a, phi)[:frame+1], 
+        y_lissajous(B, b)[:frame+1], 
+        z_lissajous(A, B, a, b, ap, bp, cp, dp, phi)[:frame+1], color='firebrick'
     )
     point, = plt.plot(
         x_lissajous(A, a, phi)[frame], y_lissajous(B, b)[frame], z_lissajous(A, B, a, b, ap, bp, cp, dp, phi)[frame], markersize=4
