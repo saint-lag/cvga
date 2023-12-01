@@ -52,10 +52,18 @@ def update_hypocycloid(frame, R, r, K):
         x_center(R, r)[frame] + x_outside_circle(r), y_center(R, r)[frame] + y_outside_circle(r), color='midnightblue')
     point, = plt.plot(
         x_hypocycloid(r, K)[frame], y_hypocycloid(r, K)[frame], color='red', markersize=3.5)
+    if frame > 0:
+        small_radius_line, = plt.plot(
+            [x_center(R, r)[frame - 1], x_hypocycloid(r, K)[frame - 1]],
+            [y_center(R, r)[frame - 1], y_hypocycloid(r, K)[frame - 1]],
+            linestyle='dashed', color='green'
+        )
     hypocycloids.append(hypocycloid)
     outside_circles.append(outside_circle)
     points.append(point)
 
+    if frame > 0:
+        small_radius.append(small_radius_line)
 
 if __name__ == '__main__':
 

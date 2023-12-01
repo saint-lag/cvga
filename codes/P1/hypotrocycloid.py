@@ -1,8 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-from mpl_toolkits import mplot3d
 import numpy as np
-from math import sqrt, acos
 
 # CONSTANTS
 T_NUM_4000 = 4000
@@ -86,7 +84,7 @@ if __name__ == '__main__':
             '''
             r = 3
             R = 5
-            d = 5
+            d = 6
 
         except ValueError:
             print('Insira valores do tipo "FLOAT"...')
