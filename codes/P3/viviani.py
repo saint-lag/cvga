@@ -129,6 +129,10 @@ if __name__ == '__main__':
         a, b, c, d = 2, 2, 2, 2
         A, B = 2, 2
         r = 8
+        r_cylinder = r/2
+        h_cylinder = 2*r
+        x_offset_cylinder = r/2
+        transparency = 0.3
 
         D = (A+B)*2
 
@@ -155,7 +159,17 @@ if __name__ == '__main__':
         y = y_sphere(r, theta, phi)
         z = z_sphere(r, phi)
         
-        ax.plot_surface(x, y, z, color="midnightblue", alpha=0.2)
+        ax.plot_surface(x, y, z, color="midnightblue", alpha=transparency)
+
+        # CYLINDER
+        u_cylinder = np.linspace(0, 2 * np.pi, 100)
+        z_cylinder = np.linspace(-h_cylinder/2, h_cylinder/2, 100)
+        u_cylinder, z_cylinder = np.meshgrid(u_cylinder, z_cylinder)
+
+        x_cylinder = r_cylinder * np.cos(u_cylinder) + x_offset_cylinder
+        y_cylinder = r_cylinder * np.sin(u_cylinder)
+
+        ax.plot(x_cylinder.flatten(), y_cylinder.flatten(), z_cylinder.flatten(), color="orange", alpha=transparency)
         
         try:
             elev_radians = mt.acos(
