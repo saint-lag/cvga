@@ -25,9 +25,9 @@ TWO = 2
 
 
 # FUNCTIONS
-'''def x_sphere(r, phi): return r * np.cos(T) * np.cos(phi)
-def y_sphere(r, phi): return r * np.sin(T) * np.sin(phi)
-def z_sphere(r): return r * np.cos(T)'''
+def x_sphere(r, theta, phi): return r * np.cos(theta) * np.sin(phi)
+def y_sphere(r, theta, phi): return r * np.sin(theta) * np.sin(phi)
+def z_sphere(r, phi): return r * np.cos(phi)
 
 def x_viviani(r): return (np.cos(T)**2) * r
 def y_viviani(r): return np.cos(T) * np.sin(T) * r
@@ -150,12 +150,12 @@ if __name__ == '__main__':
 
 
         # SPHERE
-        u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:20j]
-        x = r*np.cos(u)*np.sin(v)
-        y = r*np.sin(u)*np.sin(v)
-        z = r*np.cos(v)
+        theta, phi = np.mgrid[0:2*np.pi:20j, 0:np.pi:20j]
+        x = x_sphere(r, theta, phi)
+        y = y_sphere(r, theta, phi)
+        z = z_sphere(r, phi)
         
-        ax.plot_surface(x, y, z, color="green", alpha=0.3)
+        ax.plot_surface(x, y, z, color="midnightblue", alpha=0.2)
         
         try:
             elev_radians = mt.acos(
