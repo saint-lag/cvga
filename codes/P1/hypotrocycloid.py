@@ -45,18 +45,27 @@ def lines_r3(x, y, z, D):
 
 
 def update_hypotrocycloid(frame, R, r, d):
-    for plots in [hypotrocycloids, outside_circles, points, small_radius]:
+    for plots in [hypotrocycloids, outside_circles, points, dislocated_radius]:
         if len(plots) > 0:
             plots.pop().remove()
     hypotrocycloid, = plt.plot(
         x_hypotrocycloid(R, r, d)[:frame+1], y_hypotrocycloid(R, r, d)[:frame+1], color='firebrick')
     outside_circle, = plt.plot(
-        x_center(R, r)[frame] + x_outside_circle(d), y_center(R, r)[frame] + y_outside_circle(d), color='midnightblue')
+        x_center(R, r)[frame] + x_outside_circle(r), y_center(R, r)[frame] + y_outside_circle(r), color='midnightblue')
     point, = plt.plot(
         x_hypotrocycloid(R, r, d)[frame], y_hypotrocycloid(R, r, d)[frame], color='red', markersize=3.5)
+    if frame > 0:
+        dislocated_radius_line, = plt.plot(
+            [x_center(R, r)[frame - 1], x_hypotrocycloid(R, r, d)[frame - 1]],
+            [y_center(R, r)[frame - 1], y_hypotrocycloid(R, r, d)[frame - 1]],
+            linestyle='dashed', color='green'
+        )
     hypotrocycloids.append(hypotrocycloid)
     outside_circles.append(outside_circle)
     points.append(point)
+
+    if frame > 0:
+        dislocated_radius.append(dislocated_radius_line)
 
 
 if __name__ == '__main__':
@@ -66,7 +75,7 @@ if __name__ == '__main__':
         hypotrocycloids = []
         outside_circles = []
         points = []
-        small_radius = []
+        dislocated_radius = []
 
         try:
             '''
