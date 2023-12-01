@@ -97,11 +97,9 @@ if __name__ == '__main__':
         ax.set_zlabel('Eixo Z')
         ax.set_zlim(-D, D)
 
-        '''
         ax.grid()
-        ax.set_aspect('auto')
+        ax.set_box_aspect([np.ptp(c) for c in [ax.get_xlim(), ax.get_ylim(), ax.get_zlim()]])
         ax.set_title('lissajous')
-        '''
         
         lines_r3(ONE, ZERO, ZERO, D)
         lines_r3(ZERO, ONE, ZERO, D)

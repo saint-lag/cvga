@@ -109,7 +109,7 @@ if __name__ == '__main__':
         ax.set_zlim(-D, D)
 
         ax.grid()
-        ax.set_aspect('auto')
+        ax.set_box_aspect([np.ptp(c) for c in [ax.get_xlim(), ax.get_ylim(), ax.get_zlim()]])
         ax.set_title('hypotrocycloid')
 
         lines_r3(1, 0, 0, D)

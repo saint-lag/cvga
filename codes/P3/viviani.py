@@ -25,6 +25,10 @@ TWO = 2
 
 
 # FUNCTIONS
+'''def x_sphere(r, phi): return r * np.cos(T) * np.cos(phi)
+def y_sphere(r, phi): return r * np.sin(T) * np.sin(phi)
+def z_sphere(r): return r * np.cos(T)'''
+
 def x_viviani(r): return (np.cos(T)**2) * r
 def y_viviani(r): return np.cos(T) * np.sin(T) * r
 def z_viviani(r): return np.sin(T) * r
@@ -40,6 +44,7 @@ def lines_r3(x, y, z, D):
     Y = T * y
     Z = T * z
     plt.plot(X, Y, Z, color='black', linewidth=0.5)
+
 
 def update_viviani(frame, r):
     for plots in [frenet_serret, points, vectors]:
@@ -123,13 +128,14 @@ if __name__ == '__main__':
         # CONSTANTS
         a, b, c, d = 2, 2, 2, 2
         A, B = 2, 2
-        r = 2
+        r = 4
 
         D = (A+B)*2
 
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         ax.grid()
+
 
         ax.set_xlabel('Eixo X')
         ax.axhline(0, color='black', linewidth=1)
@@ -142,9 +148,26 @@ if __name__ == '__main__':
         ax.set_zlabel('Eixo Z')
         ax.set_zlim(-D, D)
 
+
+        # SPHERE
+        u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:20j]
+        x = r*np.cos(u)*np.sin(v)
+        y = r*np.sin(u)*np.sin(v)
+        z = r*np.cos(v)
         
-        ax.grid()
-        ax.set_aspect('auto')
+        ax.plot_surface(x, y, z, color="green", alpha=0.3)
+        
+        try:
+            elev_radians = mt.acos(
+                (a**2 + b**2) / mt.sqrt((a**2 + b**2 + c**2) * (a**2 + b**2)))
+            azimuth_radians = mt.acos(a / mt.sqrt(a**2 + b**2))
+        except ZeroDivisionError:
+            elev_radians, azimuth_radians = 1.5707963267948966, 1.5707963267948966
+        elev = (PI_RAD/np.pi) * elev_radians
+        azimuth = (PI_RAD/np.pi) * azimuth_radians
+        ax.view_init(elev=elev, azim=azimuth)
+
+        ax.set_box_aspect([np.ptp(c) for c in [ax.get_xlim(), ax.get_ylim(), ax.get_zlim()]])
         ax.set_title('viviani')
         
         
