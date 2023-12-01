@@ -1,8 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-from mpl_toolkits import mplot3d
 import numpy as np
-from math import sqrt, acos
 
 # CONSTANTS
 T_NUM_4000 = 4000
@@ -15,8 +13,8 @@ TWO = 2
 
 
 # FUNCTIONS
-def x_hypocycloid(R, r): return (R-r) * np.cos(T) + r * np.cos((R-r)*T/r)
-def y_hypocycloid(R, r): return (R-r) * np.sin(T) + r * np.sin((R-r)*T/r)
+def x_hypocycloid(r, k): return r*(k-1)*np.cos(T) + r*np.cos((k-1)*T)
+def y_hypocycloid(r, k): return r*(k-1)*np.sin(T) - r*np.sin((k-1)*T)
 
 
 T = np.linspace(ZERO, SEVENTY*np.pi, T_NUM_2000)
@@ -44,16 +42,16 @@ def lines_r3(x, y, z, D):
     plt.plot(X, Y, Z, color='black', linewidth=0.5)
 
 
-def update_hypocycloid(frame, R, r):
+def update_hypocycloid(frame, R, r, K):
     for plots in [hypocycloids, outside_circles, points, small_radius]:
         if len(plots) > 0:
             plots.pop().remove()
     hypocycloid, = plt.plot(
-        x_hypocycloid(R, r)[:frame+1], y_hypocycloid(R, r)[:frame+1], color='firebrick')
+        x_hypocycloid(r, K)[:frame+1], y_hypocycloid(r, K)[:frame+1], color='firebrick')
     outside_circle, = plt.plot(
         x_center(R, r)[frame] + x_outside_circle(r), y_center(R, r)[frame] + y_outside_circle(r), color='midnightblue')
     point, = plt.plot(
-        x_hypocycloid(R, r)[frame], y_hypocycloid(R, r)[frame], color='red', markersize=3.5)
+        x_hypocycloid(r, K)[frame], y_hypocycloid(r, K)[frame], color='red', markersize=3.5)
     hypocycloids.append(hypocycloid)
     outside_circles.append(outside_circle)
     points.append(point)
@@ -74,8 +72,8 @@ if __name__ == '__main__':
             K = float(input("Insira K: "))
             r = float(input("Insira o raio do círculo menor: "))
             '''
-            K = 1/4
-            r = 30
+            K = 4
+            r = 4
 
         except ValueError:
             print('Insira valores do tipo "FLOAT"...')
@@ -116,7 +114,7 @@ if __name__ == '__main__':
             R), color='mediumslateblue')
 
         ani = animation.FuncAnimation(
-            fig, update_hypocycloid, fargs=(R, r), frames=2000, interval=SEVENTY*V)
+            fig, update_hypocycloid, fargs=(R, r, K), frames=2000, interval=SEVENTY*V)
 
         plt.show()
         break
