@@ -110,7 +110,7 @@ if __name__ == '__main__':
         X_plane, Y_plane = np.meshgrid(x_plane, y_plane)
         Z_plane = (-ap * X_plane - bp * Y_plane + dp)/cp
 
-        ax.plot_surface(X_plane, Y_plane, Z_plane, color='black', alpha=.25)
+        ax.plot_surface(X_plane, Y_plane, Z_plane, color='cyan', alpha=.25)
 
         try:
             elev_radians = mt.acos(
@@ -125,7 +125,7 @@ if __name__ == '__main__':
         
 
         ani = animation.FuncAnimation(
-            fig, update_lissajous, fargs=(A, B, a, b, ap, bp ,cp, dp, phi), frames=T_NUM_5000, interval=TWENTY)
+            fig, update_lissajous, fargs=(A, B, a, b, ap, bp ,cp, dp, phi), frames=TWO_HUNDRED*TWO, interval=TWENTY)
 
         plt.show()
         break

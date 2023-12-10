@@ -124,7 +124,7 @@ if __name__ == '__main__':
         X_plane, Y_plane = np.meshgrid(x_plane, y_plane)
         Z_plane = (-a * X_plane - b * Y_plane + d)/c
 
-        ax.plot_surface(X_plane, Y_plane, Z_plane, color='black', alpha=.25)
+        ax.plot_surface(X_plane, Y_plane, Z_plane, color='violet', alpha=.25)
 
         try:
             elev_radians = acos(
@@ -140,7 +140,7 @@ if __name__ == '__main__':
             R), z_inside_circle(R, a, b, c, d), color='mediumslateblue')
 
         ani = animation.FuncAnimation(
-            fig, update_epicycloid, fargs=(R, r, a, b, c, d), frames=TWENTY_HUNDRED, interval=TWENTY_FIVE*(D/TWO))
+            fig, update_epicycloid, fargs=(R, r, a, b, c, d), frames=TWENTY_HUNDRED, interval=TWENTY_FIVE)
 
         plt.show()
         break

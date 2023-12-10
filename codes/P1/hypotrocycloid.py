@@ -124,7 +124,7 @@ if __name__ == '__main__':
             R), color='mediumslateblue')
 
         ani = animation.FuncAnimation(
-            fig, update_hypotrocycloid, fargs=(R, r, d), frames=2000, interval=SEVENTY*V)
+            fig, update_hypotrocycloid, fargs=(R, r, d), frames=500, interval=SEVENTY)
 
         plt.show()
         break
